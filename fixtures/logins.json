@@ -1,0 +1,10 @@
+{
+    "invalid": [
+        "     ",
+        "!@#$%^",
+        "jdfvbjdfvh768"
+    ],
+    "valid": [
+        "therock"
+    ]
+}

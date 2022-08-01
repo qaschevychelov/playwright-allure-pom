@@ -1,0 +1,18 @@
+{
+  "name": "playwrightpom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "debug": "ALLURE_RESULTS_DIR=allure-results npx playwright test tests/first.spec.ts --project=chromium",
+    "default:report": "npx playwright show-report",
+    "allure": "allure serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.24.2",
+    "allure-playwright": "^2.0.0-beta.18"
+  }
+}
