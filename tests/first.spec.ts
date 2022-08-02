@@ -16,12 +16,12 @@ myTest.describe('SMMTOUCH.TECH - домашняя', () => {
     await app.baseStep.checkLangSwitcherIsVisible()
     await app.baseStep.checkInputIsVisibleByPlaceHolder("Имя профиля Инстаграм")
     await app.baseStep.checkBtnIsVisible("Раскрутить Инстаграм")
-    await expect(page.locator(`//*[normalize-space(.)='В одном шаге от популярности']`)).toBeVisible()
+    await app.baseStep.checkAnyTextIsVisible(langs.Русский)
   })
 
   myTest('отображается ошибка, если не ввести логин', async ({ page, app }) => {
     await app.baseStep.clickBtn("Раскрутить Инстаграм")
-    await expect(page.locator(`//*[normalize-space(.)='${errors.emptyLogin}']`)).toBeVisible()
+    await app.baseStep.checkAnyTextIsVisible(errors.emptyLogin)
   })
 
   for (const lang in langs) {
@@ -29,8 +29,7 @@ myTest.describe('SMMTOUCH.TECH - домашняя', () => {
     myTest(`можно переключить язык на ${lang}`, async ({ page, app }) => {
       await app.baseStep.changeLang(lang)
       let val = Object.entries(langs).filter(o => { return o[0] === lang }).map(o => o[1])[0]
-      console.log(val)
-      await expect(page.locator(`//*[normalize-space(.)='${val}']`)).toBeVisible()
+      await app.baseStep.checkAnyTextIsVisible(val)
     })
   }
 
@@ -45,7 +44,7 @@ myTest.describe('SMMTOUCH.TECH - домашняя', () => {
     myTest(`отображается ошибка, если логин невалидный ${login}`, async ({ page, app }) => {
       await app.baseStep.setField("Имя профиля Инстаграм", login)
       await app.baseStep.submit("Раскрутить Инстаграм")
-      await expect(page.locator(`//*[normalize-space(.)='${errors.emptyLogin}']`)).toBeVisible()
+      await app.baseStep.checkAnyTextIsVisible(errors.emptyLogin, 10)
     });
   }
 

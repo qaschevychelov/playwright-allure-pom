@@ -47,9 +47,12 @@ export const BaseStep = (page: Page) => ({
         })
     },
 
-    async checkAnyTextIsVisible(text: string) {
+    async checkAnyTextIsVisible(text: string, time?: number) {
         await test.step("текст отображается " + text, async () => {
-            await expect(this.basePage.getAnyText(text)).toBeVisible()
+            if (typeof time === 'undefined')
+                await expect(this.basePage.getAnyText(text)).toBeVisible()
+            else
+                await expect(this.basePage.getAnyText(text)).toBeVisible({timeout: time * 1000})
         })
     }
 })
