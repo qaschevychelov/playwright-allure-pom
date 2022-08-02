@@ -32,4 +32,10 @@ export class BurgerStep extends BaseStep {
             await this.homePage.burgerBtn.click()
         })
     }
+
+    async checkSectionTextIsVisible(text: string) {
+        await test.step("текст отображается " + text, async () => {
+            await expect(this.basePage.page.locator(`//section[normalize-space(.)='${text}']`)).toBeVisible()
+        })
+    }
 }

@@ -20,8 +20,8 @@ test.describe('SMMTOUCH.TECH - проверка соглашений', () => {
     ])
     await newPage.waitForLoadState();
     burgerStep = new BurgerStep(newPage)
-    // await burgerStep.checkAnyTextIsVisible(policy.ttl)
-    // await burgerStep.checkAnyTextIsVisible(policy.body)
+    await burgerStep.checkAnyTextIsVisible(policy.ttl)
+    await burgerStep.checkSectionTextIsVisible(policy.body)
   })
   test('публичная оферта', async ({ context }) => {
     const [newPage] = await Promise.all([
@@ -30,8 +30,8 @@ test.describe('SMMTOUCH.TECH - проверка соглашений', () => {
     ])
     await newPage.waitForLoadState();
     burgerStep = new BurgerStep(newPage)
-    // await burgerStep.checkAnyTextIsVisible(oferta.ttl)
-    // await burgerStep.checkAnyTextIsVisible(oferta.body)
+    await burgerStep.checkAnyTextIsVisible(oferta.ttl)
+    await burgerStep.checkSectionTextIsVisible(oferta.body)
   })
   test('политика возврата', async ({ context }) => {
     const [newPage] = await Promise.all([
@@ -40,7 +40,7 @@ test.describe('SMMTOUCH.TECH - проверка соглашений', () => {
     ])
     await newPage.waitForLoadState();
     burgerStep = new BurgerStep(newPage)
-    // await burgerStep.checkAnyTextIsVisible(returnPolicy.ttl)
-    // await burgerStep.checkAnyTextIsVisible(returnPolicy.body)
+    await burgerStep.checkAnyTextIsVisible(returnPolicy.ttl)
+    await burgerStep.checkSectionTextIsVisible(returnPolicy.body)
   })
 })

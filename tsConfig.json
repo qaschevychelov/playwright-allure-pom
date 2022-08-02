@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "target": "es6",
+            "lib": ["dom", "dom.iterable", "esnext"],
+                "strict": true,
+                    "module": "commonjs",
+                        "noEmit": true
+    },
+    "include": ["./"]
+}

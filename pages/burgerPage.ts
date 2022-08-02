@@ -6,6 +6,6 @@ export class BurgerPage extends BasePage {
         super(page)
     }
     getLink(linkName: string): Locator {
-        return this.page.locator(".links", {hasText: linkName})
+        return this.page.locator(".links a", {hasText: linkName})
     }
 }
