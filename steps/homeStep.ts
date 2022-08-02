@@ -1,6 +1,6 @@
 import { BaseStep } from "./BaseStep";
 import { HomePage } from "../pages/homePage";
-import { expect, Page } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 
 export class HomeStep extends BaseStep {
     readonly homePage: HomePage
@@ -11,16 +11,19 @@ export class HomeStep extends BaseStep {
     }
 
     async checkBurgerBtnIsVisible() {
-        // cy.allure().step("Кнопка бургер отображается", true)
-        await expect(this.homePage.burgerBtn).toBeVisible()
+        await test.step("Кнопка бургер отображается", async() => {
+            await expect(this.homePage.burgerBtn).toBeVisible()
+        })
     }
     async checkMainHintImageIsVisible() {
-        // cy.allure().step("Изображение с подсказкой для Инсты отображается", true)
-        await expect(this.homePage.hintImage).toBeVisible()
+        await test.step("Изображение с подсказкой для Инсты отображается", async() => {
+            await expect(this.homePage.hintImage).toBeVisible()
+        })
     }
 
     async checLogoVisible() {
-        // cy.allure().step("Лого в шапке отображается", true)
-        await expect(this.homePage.logo).toBeVisible()
+        await test.step("Лого в шапке отображается", async() => {
+            await expect(this.homePage.logo).toBeVisible()
+        })
     }
 }

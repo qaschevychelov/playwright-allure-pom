@@ -1,6 +1,6 @@
 import { BaseStep } from "./baseStep";
 import { ProfilePage } from "../pages/profilePage";
-import { expect, Page } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 
 export class ProfileStep extends BaseStep {
   readonly profilePage: ProfilePage
@@ -9,13 +9,15 @@ export class ProfileStep extends BaseStep {
     super(page);
     this.profilePage = new ProfilePage(page)
   }
-  
+
   async checkLoginIsVisible(login: string) {
-    // cy.allure().step("отображается логин " + login, true)
-    await expect(this.profilePage.getLogin(login)).toBeVisible()
+    await test.step("отображается логин " + login, async () => {
+      await expect(this.profilePage.getLogin(login)).toBeVisible()
+    })
   }
   async checkAvatarIsVisible() {
-    // cy.allure().step("отображается аватар", true)
-    await expect(this.profilePage.avatar).toBeVisible({timeout: 10000})
+    await test.step("отображается аватар", async () => {
+      await expect(this.profilePage.avatar).toBeVisible({ timeout: 10000 })
+    })
   }
 }

@@ -24,7 +24,7 @@ test.describe('SMMTOUCH.TECH - домашняя', () => {
     await homeStep.checLogoVisible()
     await homeStep.checkLangSwitcherIsVisible()
     await homeStep.checkInputIsVisibleByPlaceHolder("Имя профиля Инстаграм")
-    await homeStep.checkBtnIsVisible("Рdаскрутить Инстаграм")
+    await homeStep.checkBtnIsVisible("Раскрутить Инстаграм")
     await expect(page.locator(`//*[normalize-space(.)='В одном шаге от популярности']`)).toBeVisible()
   })
 

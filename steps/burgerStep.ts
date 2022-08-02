@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 import { HomePage } from "../pages/homePage";
 import { BurgerPage } from "../pages/burgerPage";
 import { BaseStep } from "./BaseStep";
@@ -13,19 +13,23 @@ export class BurgerStep extends BaseStep {
         this.burgerPage = new BurgerPage(page)
     }
     async checkPageBodyTextIsVisible(body: string) {
-        await expect(this.homePage.getAnyText(body)).toBeVisible()
-        // cy.allure().step(`страница содержит текст`, true)
+        await test.step(`страница содержит текст`, async () => {
+            await expect(this.homePage.getAnyText(body)).toBeVisible()
+        })
     }
     async clickLink(linkName: string) {
-        // cy.allure().step(`перейти по ссылке ${linkName}`, true)
-        await this.burgerPage.getLink(linkName).click()
+        await test.step(`перейти по ссылке ${linkName}`, async () => {
+            await this.burgerPage.getLink(linkName).click()
+        })
     }
     async checkLinkIsVisible(linkName: string) {
-        //   cy.allure().step(`ссылка ${linkName} отображается`, true)
-        await expect(this.burgerPage.getLink(linkName)).toBeVisible()
+        await test.step(`ссылка ${linkName} отображается`, async () => {
+            await expect(this.burgerPage.getLink(linkName)).toBeVisible()
+        })
     }
     async openBurger() {
-        // cy.allure().step("кликнуть на бургер меню", true)
-        await this.homePage.burgerBtn.click()
+        await test.step("кликнуть на бургер меню", async () => {
+            await this.homePage.burgerBtn.click()
+        })
     }
 }
