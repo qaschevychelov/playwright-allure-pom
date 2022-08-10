@@ -52,6 +52,7 @@ myTest.describe('SMMTOUCH.TECH - домашняя', () => {
     await app.baseStep.setField("Имя профиля Инстаграм", logins.valid[0])
     await app.baseStep.submit("Раскрутить Инстаграм")
     await app.profileStep.checkAvatarIsVisible()
+    await app.profileStep.checkAvaImage()
     await app.profileStep.checkLoginIsVisible(logins.valid[0])
   });
 })

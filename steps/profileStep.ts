@@ -16,5 +16,10 @@ export const ProfileStep = (page: Page) => ({
     await test.step("отображается аватар", async () => {
       await expect(this.profilePage.avatar).toBeVisible({ timeout: 10000 })
     })
+  },
+  async checkAvaImage() {
+    await test.step('сравним скриншот аватара', async () => {
+      await expect(await this.profilePage.avatar.screenshot()).toMatchSnapshot()
+    })
   }
 })
