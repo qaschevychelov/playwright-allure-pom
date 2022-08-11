@@ -10,6 +10,11 @@ export class ProfileStep extends BaseStep {
     this.profilePage = new ProfilePage(page)
   }
 
+  async checkAvaImg() {
+    await test.step("проверим фотографию на аватаре", async () => {
+      await expect(await this.profilePage.avatar.screenshot()).toMatchSnapshot()
+    })
+  }
   async checkLoginIsVisible(login: string) {
     await test.step("отображается логин " + login, async () => {
       await expect(this.profilePage.getLogin(login)).toBeVisible()

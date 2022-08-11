@@ -1,46 +1,44 @@
 import { BurgerStep } from '../steps/burgerStep'
-import * as policy from '../fixtures/confidentPolicy.json'
-import * as oferta from '../fixtures/oferta.json'
-import * as returnPolicy from '../fixtures/returnPolicy.json'
-import { test, Browser, chromium, type Page, BrowserContext, expect } from '@playwright/test';
+import * as policy from '../fixtures/data/confidentPolicy.json'
+import * as oferta from '../fixtures/data/oferta.json'
+import * as returnPolicy from '../fixtures/data/returnPolicy.json'
+import { test } from '../fixtures/extFixtures/extFixtures';
 
 
 test.describe('SMMTOUCH.TECH - проверка соглашений', () => {
-  let burgerStep: BurgerStep
 
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, app }) => {
     await page.goto("https://smmtouch.tech")
-    burgerStep = new BurgerStep(page)
-    await burgerStep.openBurger()
+    await app.burgerStep.openBurger()
   });
-  test('политика конфиденциальности', async ({ context }) => {
+  test('политика конфиденциальности', async ({ context, app }) => {
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      await burgerStep.clickLink("Политика конфиденциальности")
+      await app.burgerStep.clickLink("Политика конфиденциальности")
     ])
     await newPage.waitForLoadState();
-    burgerStep = new BurgerStep(newPage)
-    await burgerStep.checkAnyTextIsVisible(policy.ttl)
-    await burgerStep.checkSectionTextIsVisible(policy.body)
+    app.burgerStep = new BurgerStep(newPage)
+    await app.burgerStep.checkAnyTextIsVisible(policy.ttl)
+    await app.burgerStep.checkSectionTextIsVisible(policy.body)
   })
-  test('публичная оферта', async ({ context }) => {
+  test('публичная оферта', async ({ context, app }) => {
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      await burgerStep.clickLink("Публичная оферта")
+      await app.burgerStep.clickLink("Публичная оферта")
     ])
     await newPage.waitForLoadState();
-    burgerStep = new BurgerStep(newPage)
-    await burgerStep.checkAnyTextIsVisible(oferta.ttl)
-    await burgerStep.checkSectionTextIsVisible(oferta.body)
+    app.burgerStep = new BurgerStep(newPage)
+    await app.burgerStep.checkAnyTextIsVisible(oferta.ttl)
+    await app.burgerStep.checkSectionTextIsVisible(oferta.body)
   })
-  test('политика возврата', async ({ context }) => {
+  test('политика возврата', async ({ context, app }) => {
     const [newPage] = await Promise.all([
       context.waitForEvent('page'),
-      await burgerStep.clickLink("Политика возврата")
+      await app.burgerStep.clickLink("Политика возврата")
     ])
     await newPage.waitForLoadState();
-    burgerStep = new BurgerStep(newPage)
-    await burgerStep.checkAnyTextIsVisible(returnPolicy.ttl)
-    await burgerStep.checkSectionTextIsVisible(returnPolicy.body)
+    app.burgerStep = new BurgerStep(newPage)
+    await app.burgerStep.checkAnyTextIsVisible(returnPolicy.ttl)
+    await app.burgerStep.checkSectionTextIsVisible(returnPolicy.body)
   })
 })
