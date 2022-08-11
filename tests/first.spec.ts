@@ -27,7 +27,8 @@ test.describe('SMMTOUCH.TECH - домашняя', () => {
     if (lang === 'default') continue
     test(`можно переключить язык на ${lang}`, async ({ app }) => {
       await app.homeStep.changeLang(lang)
-      await app.homeStep.checkAnyTextIsVisible(langs[lang])
+      let val = Object.entries(langs).filter(o => { return o[0] === lang }).map(o => o[1])[0]
+      await app.homeStep.checkAnyTextIsVisible(val)
     })
   }
 
