@@ -4,12 +4,22 @@ import { expect, Page, test } from "@playwright/test";
 
 export class ProfileStep extends BaseStep {
   readonly profilePage: ProfilePage
-  
+
   constructor(page: Page) {
     super(page);
     this.profilePage = new ProfilePage(page)
   }
-  
+
+  async chooseYouMoney() {
+    await test.step(`выбираем юМани`, async () => {
+      await this.profilePage.youMoney.click()
+    })
+  }
+  async agreeWithOferta() {
+    await test.step(`соглашаемся с офертой`, async () => {
+      await this.profilePage.ofertaCheckBox.click({ position: { "x": 10, "y": 5 } })
+    })
+  }
   async clickBuy100() {
     await test.step(`кликаем купить 100 штук`, async () => {
       await this.profilePage.getBuy100Btn().click()

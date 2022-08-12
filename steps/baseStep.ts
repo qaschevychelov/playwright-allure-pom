@@ -31,9 +31,9 @@ export class BaseStep {
             await this.basePage.getBtnByText(btnName).click()
         })
     }
-    async checkBtnIsVisible(btnName: string) {
+    async checkBtnIsVisible(btnName: string, params?: { timeout?: number }) {
         await test.step(`Кнопка '${btnName}' отображается`, async () => {
-            await expect(this.basePage.getBtnByText(btnName)).toBeVisible()
+            await expect(this.basePage.getBtnByText(btnName)).toBeVisible(params)
         })
     }
     async checkInputIsVisibleByPlaceHolder(placeHolder: string) {
@@ -51,6 +51,12 @@ export class BaseStep {
     async checkAnyTextIsVisible(text: string) {
         await test.step("текст отображается " + text, async () => {
             await expect(this.basePage.getAnyText(text)).toBeVisible()
+        })
+    }
+
+    async clickLink(linkName: string) {
+        await test.step("кликнуть по ссылке " + linkName, async () => {
+            await this.basePage.getAnyLink(linkName).click()
         })
     }
 }

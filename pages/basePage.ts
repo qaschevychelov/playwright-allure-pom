@@ -19,7 +19,7 @@ export class BasePage {
     }
 
     getAnyText(text: string): Locator {
-        return this.page.locator(`//*[normalize-space(.)='${text}']`)
+        return this.page.locator(`(//*[normalize-space(.)='${text}'])[last()]`)
     }
 
     getAnyLink(text: string): Locator {
