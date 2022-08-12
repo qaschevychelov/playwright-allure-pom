@@ -5,10 +5,10 @@ import * as returnPolicy from '../fixtures/data/returnPolicy.json'
 import { test } from '../fixtures/extFixtures/extFixtures';
 
 
-test.describe('SMMTOUCH.TECH - проверка соглашений', () => {
+test.describe('проверка соглашений', () => {
 
   test.beforeEach(async ({ page, app }) => {
-    await page.goto("https://smmtouch.tech")
+    await page.goto("/")
     await app.burgerStep.openBurger()
   });
   test('политика конфиденциальности', async ({ context, app }) => {

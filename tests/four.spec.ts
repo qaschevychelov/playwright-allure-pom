@@ -3,10 +3,10 @@ import { test, type Page } from '@playwright/test';
 
 test.describe('spec4', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://smmtouch.tech")
+    await page.goto("/")
   });
 
   test('passes4', async ({ page }) => {
-    await page.goto("https://smmtouch.tech")
+    await page.goto("/")
   })
 })

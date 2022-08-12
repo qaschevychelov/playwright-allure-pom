@@ -4,9 +4,9 @@ import * as logins from '../fixtures/data/logins.json'
 import { test } from '../fixtures/extFixtures/extFixtures';
 
 
-test.describe('SMMTOUCH.TECH - домашняя', () => {
+test.describe('домашняя', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://smmtouch.tech")
+    await page.goto("/")
   });
   test('отображаются основные элементы', async ({ app }) => {
     await app.homeStep.checkMainHintImageIsVisible()
