@@ -1,5 +1,10 @@
 node {
     stage('install playwright') {
+        agent {
+            docker {
+                image 'mcr.microsoft.com/playwright:v1.24.2-focal'
+            }
+        }
         withNPM(npmrcConfig: '3be74b16-6550-4549-ac97-029b86afe630') {
             sh 'npm i -D @playwright/test'
             sh 'npx playwright install'
