@@ -1,4 +1,5 @@
 node {
+    tools {nodejs "18.7.0"}
     stage('install playwright') {
       script {
         sh 'npm i -D @playwright/test'
