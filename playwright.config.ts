@@ -34,13 +34,18 @@ const config: PlaywrightTestConfig = {
   reporter: 'allure-playwright',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    locale: "ru-RU",
-    timezoneId: "Europe/Moscow",
+    locale: process.env.proxy ? "en-EN" : "ru-RU",
+    timezoneId: process.env.proxy ? "America/Denver" : "Europe/Moscow",
+    proxy: process.env.proxy ? {
+      server: "195.245.111.216:46828",
+      username: "Qrsni9hj",
+      password: "d3rgFcp7"
+    } : undefined,
     screenshot: "only-on-failure",
     headless: true,
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
-    video: 'on-first-retry',
+    video: 'retain-on-failure',
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */

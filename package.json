@@ -6,6 +6,7 @@
   "scripts": {
     "debug": "ALLURE_RESULTS_DIR=allure-results npx playwright test tests/first.spec.ts --project=chromium",
     "test": "ALLURE_RESULTS_DIR=allure-results npx playwright test --project=chromium",
+    "proxy": "proxy=true ALLURE_RESULTS_DIR=allure-results npx playwright test --project=chromium",
     "default:report": "npx playwright show-report",
     "allure": "allure serve"
   },
