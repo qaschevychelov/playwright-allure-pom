@@ -3,7 +3,7 @@ import * as logins from '../fixtures/data/logins.json'
 import * as cards from '../fixtures/data/payments.json'
 import { faker } from '@faker-js/faker/locale/ru'
 
-test.describe('Создание заказов youMoney', () => {
+test.describe('Создание заказов paymore', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/")
   });
@@ -18,11 +18,11 @@ test.describe('Создание заказов youMoney', () => {
       await app.profileStep.checkAvatarIsVisible()
       await app.profileStep.clickBtn(service)
       await app.profileStep.selectTile(1)
-      await app.complexStep.youMoney.makeLikeViewOrder(
-        cards.youMoney.valid[0].number, 
-        cards.youMoney.valid[0].MM, 
-        cards.youMoney.valid[0].YY, 
-        cards.youMoney.valid[0].CVC
+      await app.complexStep.payMore.makeLikeViewOrder(
+        cards.paymore.valid[0].number, 
+        cards.paymore.valid[0].MM, 
+        cards.paymore.valid[0].YY, 
+        cards.paymore.valid[0].CVC
       )
       await app.orderResultStep.checkAnyTextIsVisible("Спасибо за заказ")
       await app.orderResultStep.checkAnyTextIsVisible("Оставьте свой email и получите полезные бонусы")
@@ -39,11 +39,11 @@ test.describe('Создание заказов youMoney', () => {
     await app.homeStep.submit("Раскрутить Инстаграм")
 
     await app.profileStep.checkAvatarIsVisible()
-    await app.complexStep.youMoney.makeSubsOrder(
-      cards.youMoney.valid[0].number, 
-      cards.youMoney.valid[0].MM, 
-      cards.youMoney.valid[0].YY, 
-      cards.youMoney.valid[0].CVC
+    await app.complexStep.payMore.makeSubsOrder(
+      cards.paymore.valid[0].number, 
+      cards.paymore.valid[0].MM, 
+      cards.paymore.valid[0].YY, 
+      cards.paymore.valid[0].CVC
     )
     await app.orderResultStep.checkAnyTextIsVisible("Спасибо за заказ")
     await app.orderResultStep.checkAnyTextIsVisible("Оставьте свой email и получите полезные бонусы")
@@ -59,11 +59,11 @@ test.describe('Создание заказов youMoney', () => {
     await app.homeStep.submit("Раскрутить Инстаграм")
 
     await app.profileStep.checkAvatarIsVisible()
-    await app.complexStep.youMoney.makeSubsOrder(
-      cards.youMoney.invalid[0], 
-      cards.youMoney.valid[0].MM, 
-      cards.youMoney.valid[0].YY, 
-      cards.youMoney.valid[0].CVC
+    await app.complexStep.payMore.makeSubsOrder(
+      cards.paymore.invalid[0], 
+      cards.paymore.valid[0].MM, 
+      cards.paymore.valid[0].YY, 
+      cards.paymore.valid[0].CVC
     )
     await app.orderResultStep.checkAnyTextIsVisible("Оплата не прошла")
     await app.orderResultStep.checkAnyTextIsVisible("Напишите нам, мы поможем вам провести оплату")
@@ -79,11 +79,11 @@ test.describe('Создание заказов youMoney', () => {
     await app.homeStep.submit("Раскрутить Инстаграм")
 
     await app.profileStep.checkAvatarIsVisible()
-    await app.complexStep.youMoney.makeSubsOrder(
-      cards.youMoney.invalid[0], 
-      cards.youMoney.valid[0].MM, 
-      cards.youMoney.valid[0].YY, 
-      cards.youMoney.valid[0].CVC
+    await app.complexStep.payMore.makeSubsOrder(
+      cards.paymore.invalid[0], 
+      cards.paymore.valid[0].MM, 
+      cards.paymore.valid[0].YY, 
+      cards.paymore.valid[0].CVC
     )
 
     await app.orderResultStep.clickBtn("Повторить оплату")
@@ -96,11 +96,11 @@ test.describe('Создание заказов youMoney', () => {
     await app.homeStep.submit("Раскрутить Инстаграм")
 
     await app.profileStep.checkAvatarIsVisible()
-    await app.complexStep.youMoney.makeSubsOrder(
-      cards.youMoney.invalid[0], 
-      cards.youMoney.valid[0].MM, 
-      cards.youMoney.valid[0].YY, 
-      cards.youMoney.valid[0].CVC
+    await app.complexStep.payMore.makeSubsOrder(
+      cards.paymore.invalid[0], 
+      cards.paymore.valid[0].MM, 
+      cards.paymore.valid[0].YY, 
+      cards.paymore.valid[0].CVC
     )
 
     await app.orderResultStep.clickLink("На главную")

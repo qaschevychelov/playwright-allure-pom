@@ -1,3 +1,4 @@
+import { PayMoreStep } from './../../steps/payMoreSteps';
 import { ComplexStep } from './../../steps/complexStep';
 import { YouMoneyStep } from './../../steps/youMoneySteps';
 import { Page, test as base } from '@playwright/test'
@@ -11,6 +12,7 @@ export const app = (page: Page) => ({
     homeStep: new HomeStep(page),
     profileStep: new ProfileStep(page),
     youMoneyStep: new YouMoneyStep(page),
+    payMoreStep: new PayMoreStep(page),
     orderResultStep: new OrderResultStep(page),
     complexStep: new ComplexStep(page)
 })
