@@ -1,12 +1,14 @@
-import { BaseStep } from '../steps/BaseStep'
-import { test, type Page } from '@playwright/test';
+import { test } from '../fixtures/extFixtures/extFixtures';
+import * as logins from '../fixtures/data/logins.json'
 
-test.describe('spec4', () => {
+test.describe('страница профиля', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/")
-  });
+    await page.goto("/account/" + logins.valid[0])
+  })
 
-  test('passes4', async ({ page }) => {
-    await page.goto("/")
+  test('Изменить логин', async ({ app }) => {
+    await app.profileStep.checkAvatarIsVisible()
+    await app.profileStep.clickLink("Изменить логин")
+    await app.profileStep.checkBtnIsVisible("Раскрутить Инстаграм")
   })
 })
