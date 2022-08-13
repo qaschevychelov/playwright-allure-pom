@@ -2,10 +2,16 @@ pipeline {
   agent { 
     docker { 
       image 'mcr.microsoft.com/playwright:v1.24.2-focal'
-      args '-v /var/jenkins_home:/var/jenkins_home' 
+      args '-v /var/jenkins_home:/var/jenkins_home -v /var/jenkins_workspaces:/var/jenkins_workspaces' 
     } 
   }
   stages {
+    stage('install playwright') {
+      steps {
+        sh 'npm i -D @playwright/test'
+        sh 'npx playwright install'
+      }
+    }
     stage('test') {
       steps {
         sh 'npm run test'
