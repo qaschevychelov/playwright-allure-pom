@@ -1,4 +1,4 @@
-stages {
+node {
     stage('install playwright') {
       script {
         sh 'npm i -D @playwright/test'
