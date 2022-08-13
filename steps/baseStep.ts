@@ -8,6 +8,11 @@ export class BaseStep {
         this.basePage = new BasePage(page)
     }
 
+    async isAnyTextViisible(text: string): Promise<boolean> {
+        return await test.step(`текст отображается? ${text}`, async () => {
+            await this.basePage.getAnyText(text).isVisible();
+        });
+    }
     async submit(btnName: string) {
         await test.step(`Нажать кнопку ${btnName}`, async () => {
             await this.basePage.getBtnByText(btnName).click()
@@ -25,9 +30,12 @@ export class BaseStep {
             await this.basePage.getAnyLink(lang).click()
         })
     }
-    async clickBtn(btnName: string) {
+    async clickBtn(btnName: string, isDouble?: boolean) {
         await test.step(`нажать кнопку ${btnName}`, async () => {
-            await this.basePage.getBtnByText(btnName).click()
+            if (typeof isDouble == 'undefined')
+                await this.basePage.getBtnByText(btnName).click()
+            else
+                await this.basePage.getBtnByText(btnName).dblclick()
         })
     }
     async checkBtnIsVisible(btnName: string, params?: { timeout?: number }) {
@@ -56,6 +64,11 @@ export class BaseStep {
     async clickLink(linkName: string) {
         await test.step("кликнуть по ссылке " + linkName, async () => {
             await this.basePage.getAnyLink(linkName).click()
+        })
+    }
+    async checkLinkVisible(linkName: string) {
+        await test.step("кликнуть по ссылке " + linkName, async () => {
+            await expect(this.basePage.getAnyLink(linkName)).toBeVisible()
         })
     }
 }

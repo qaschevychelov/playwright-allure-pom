@@ -1,3 +1,4 @@
+import { ComplexStep } from './../../steps/complexStep';
 import { YouMoneyStep } from './../../steps/youMoneySteps';
 import { Page, test as base } from '@playwright/test'
 import { BurgerStep } from '../../steps/burgerStep';
@@ -11,6 +12,7 @@ export const app = (page: Page) => ({
     profileStep: new ProfileStep(page),
     youMoneyStep: new YouMoneyStep(page),
     orderResultStep: new OrderResultStep(page),
+    complexStep: new ComplexStep(page)
 })
 
 export const test = base.extend<{ app: ReturnType<typeof app> }>({

@@ -18,24 +18,9 @@ test.describe('Создание заказов', () => {
       await app.profileStep.checkAvatarIsVisible()
       await app.profileStep.clickBtn(service)
       await app.profileStep.selectTile(1)
-      await app.profileStep.clickBuy100LikePost()
-      await app.profileStep.chooseYouMoney()
-      await app.profileStep.agreeWithOferta()
-      await app.profileStep.clickBtn("Оплатить")
-
-      await app.youMoneyStep.waitForCardInputVisible()
-      await app.youMoneyStep.setField("Номер карты", cards.valid[0].number)
-      await app.youMoneyStep.waitForCardValidating()
-      await app.youMoneyStep.setField("ММ", cards.valid[0].MM)
-      await app.youMoneyStep.setField("ГГ", cards.valid[0].YY)
-      await app.youMoneyStep.setField("CVC", cards.valid[0].CVC)
-      await app.youMoneyStep.clickBtn("Заплатить")
-
-      await app.youMoneyStep.checkBtnIsVisible("Confirm", { timeout: 20000 })
-      await app.youMoneyStep.clickBtn("Confirm")
-      await app.youMoneyStep.clickLink("Вернуться в магазин")
-
-      await app.orderResultStep.waitForPageLoaded()
+      await app.complexStep.makeLikeViewOrder(
+        cards.valid[0].number, cards.valid[0].MM, cards.valid[0].YY, cards.valid[0].CVC
+      )
       await app.orderResultStep.checkAnyTextIsVisible("Спасибо за заказ")
       await app.orderResultStep.checkAnyTextIsVisible("Оставьте свой email и получите полезные бонусы")
       await app.orderResultStep.checkAnyTextIsVisible("Отслеживание статуса заказа")
@@ -51,24 +36,9 @@ test.describe('Создание заказов', () => {
     await app.homeStep.submit("Раскрутить Инстаграм")
 
     await app.profileStep.checkAvatarIsVisible()
-    await app.profileStep.clickBuy100Subs()
-    await app.profileStep.chooseYouMoney()
-    await app.profileStep.agreeWithOferta()
-    await app.profileStep.clickBtn("Оплатить")
-
-    await app.youMoneyStep.waitForCardInputVisible()
-    await app.youMoneyStep.setField("Номер карты", cards.valid[0].number)
-    await app.youMoneyStep.waitForCardValidating()
-    await app.youMoneyStep.setField("ММ", cards.valid[0].MM)
-    await app.youMoneyStep.setField("ГГ", cards.valid[0].YY)
-    await app.youMoneyStep.setField("CVC", cards.valid[0].CVC)
-    await app.youMoneyStep.clickBtn("Заплатить")
-
-    await app.youMoneyStep.checkBtnIsVisible("Confirm", { timeout: 20000 })
-    await app.youMoneyStep.clickBtn("Confirm")
-    await app.youMoneyStep.clickLink("Вернуться в магазин")
-
-    await app.orderResultStep.waitForPageLoaded()
+    await app.complexStep.makeSubsOrder(
+      cards.valid[0].number, cards.valid[0].MM, cards.valid[0].YY, cards.valid[0].CVC
+    )
     await app.orderResultStep.checkAnyTextIsVisible("Спасибо за заказ")
     await app.orderResultStep.checkAnyTextIsVisible("Оставьте свой email и получите полезные бонусы")
     await app.orderResultStep.checkAnyTextIsVisible("Отслеживание статуса заказа")
@@ -76,5 +46,50 @@ test.describe('Создание заказов', () => {
     await app.orderResultStep.checkInputIsVisibleByPlaceHolder("Введите ваш email")
     await app.orderResultStep.checkBtnIsVisible("Получить бонусы")
     await app.orderResultStep.checkAnyTextIsVisible("На главную")
+  })
+
+  test('подписчики - фейл, невалидная карта', async ({ app }) => {
+    await app.homeStep.setField("Имя профиля Инстаграм", logins.valid[0])
+    await app.homeStep.submit("Раскрутить Инстаграм")
+
+    await app.profileStep.checkAvatarIsVisible()
+    await app.complexStep.makeSubsOrder(
+      cards.invalid[0], cards.valid[0].MM, cards.valid[0].YY, cards.valid[0].CVC
+    )
+    await app.orderResultStep.checkAnyTextIsVisible("Оплата не прошла")
+    await app.orderResultStep.checkAnyTextIsVisible("Напишите нам, мы поможем вам провести оплату")
+    await app.orderResultStep.checkLinkVisible("Написать в Telegram")
+    await app.orderResultStep.checkLinkVisible("Написать в WhatsApp")
+    await app.orderResultStep.checkLinkVisible("Написать на email")
+    await app.orderResultStep.checkBtnIsVisible("Повторить оплату")
+    await app.orderResultStep.checkLinkVisible("На главную")
+  })
+
+  test('неудача - повторить заказ', async ({ app }) => {
+    await app.homeStep.setField("Имя профиля Инстаграм", logins.valid[0])
+    await app.homeStep.submit("Раскрутить Инстаграм")
+
+    await app.profileStep.checkAvatarIsVisible()
+    await app.complexStep.makeSubsOrder(
+      cards.invalid[0], cards.valid[0].MM, cards.valid[0].YY, cards.valid[0].CVC
+    )
+
+    await app.orderResultStep.clickBtn("Повторить оплату")
+    await app.orderResultStep.checkBtnIsVisible("Оплатить")
+    await app.orderResultStep.checkAnyTextIsVisible("Банковская карта")
+  })
+
+  test('неудача - на главную', async ({ app }) => {
+    await app.homeStep.setField("Имя профиля Инстаграм", logins.valid[0])
+    await app.homeStep.submit("Раскрутить Инстаграм")
+
+    await app.profileStep.checkAvatarIsVisible()
+    await app.complexStep.makeSubsOrder(
+      cards.invalid[0], cards.valid[0].MM, cards.valid[0].YY, cards.valid[0].CVC
+    )
+
+    await app.orderResultStep.clickLink("На главную")
+    await app.orderResultStep.checkBtnIsVisible("Оплатить")
+    await app.profileStep.checkAvatarIsVisible()
   })
 })

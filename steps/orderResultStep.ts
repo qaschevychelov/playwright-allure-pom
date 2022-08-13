@@ -13,7 +13,7 @@ export class OrderResultStep extends BaseStep {
 
     async waitForPageLoaded() {
         await test.step(`отображается страница с результатом заказа`, async () => {
-            await expect(this.orderResultPage.cardImg).toBeVisible({ timeout: 20000 })
+            await expect(this.orderResultPage.cardImg).toBeVisible({ timeout: 30000 })
         })
     }
 }
