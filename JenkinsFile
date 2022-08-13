@@ -24,7 +24,18 @@ pipeline {
           npm run test
         '''
       }
-      allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
     }
+    stage('reports') {
+        script {
+            allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-results']]
+			])
+		}
+				
+	}
   }
 }
