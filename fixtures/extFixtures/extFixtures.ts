@@ -1,5 +1,5 @@
 import { YouMoneyStep } from './../../steps/youMoneySteps';
-import { Browser, BrowserContext, Page, test as base } from '@playwright/test'
+import { Page, test as base } from '@playwright/test'
 import { BurgerStep } from '../../steps/burgerStep';
 import { HomeStep } from '../../steps/homeStep';
 import { ProfileStep } from '../../steps/profileStep';
@@ -15,10 +15,6 @@ export const app = (page: Page) => ({
 
 export const test = base.extend<{ app: ReturnType<typeof app> }>({
     app: async ({ page }, use) => {
-        Object.assign(page.context(), {
-            locale: "ru-RU",
-            timezoneId: "Europe/Moscow"
-        })
         await use(app(page));
     }
 })

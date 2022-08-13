@@ -34,6 +34,8 @@ const config: PlaywrightTestConfig = {
   reporter: 'allure-playwright',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    locale: "ru-RU",
+    timezoneId: "Europe/Moscow",
     screenshot: "only-on-failure",
     headless: true,
     viewport: { width: 1920, height: 1080 },

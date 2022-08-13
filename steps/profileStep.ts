@@ -20,9 +20,14 @@ export class ProfileStep extends BaseStep {
       await this.profilePage.ofertaCheckBox.click({ position: { "x": 10, "y": 5 } })
     })
   }
-  async clickBuy100() {
+  async clickBuy100Subs() {
     await test.step(`кликаем купить 100 штук`, async () => {
-      await this.profilePage.getBuy100Btn().click()
+      await this.profilePage.buy100SubsBtn.click()
+    })
+  }
+  async clickBuy100LikePost() {
+    await test.step(`кликаем купить 100 штук`, async () => {
+      await this.profilePage.buy100LikePostBtn.click()
     })
   }
   async selectTile(tileNum: number) {

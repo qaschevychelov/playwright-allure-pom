@@ -1,4 +1,3 @@
-import { HomePage } from './../pages/homePage';
 import { BasePage } from './../pages/basePage';
 import { expect, Page, test } from "@playwright/test";
 
