@@ -1,20 +1,19 @@
 node {
-    tools {nodejs "18.7.0"}
     stage('install playwright') {
-      script {
-        sh 'npm i -D @playwright/test'
-        sh 'npx playwright install'
-      }
+        withNPM(npmrcConfig: 'MyNpmrcConfig') {
+            sh 'npm i -D @playwright/test'
+            sh 'npx playwright install'
+        }
     }
     stage('help') {
-      script {
-        sh 'npx playwright test --help'
-      }
+        withNPM(npmrcConfig: 'MyNpmrcConfig') {
+            sh 'npx playwright test --help'
+        }
     }
     stage('test') {
-      script {
-        sh 'npm run test'
-      }
+        withNPM(npmrcConfig: 'MyNpmrcConfig') {
+            sh 'npm run test'
+        }
     }
     stage('reports') {
         script {
