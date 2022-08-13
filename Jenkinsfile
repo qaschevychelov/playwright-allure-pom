@@ -8,13 +8,17 @@ pipeline {
   stages {
     stage('install playwright') {
       steps {
-        sh 'npm i -D @playwright/test'
-        sh 'npx playwright install'
+        ws("/var/jenkins_workspaces/helloworld") {
+          sh 'npm i -D @playwright/test'
+          sh 'npx playwright install'
+        }
       }
     }
     stage('test') {
       steps {
-        sh 'npm run test'
+        ws("/var/jenkins_workspaces/helloworld") {
+          sh 'npm run test'
+        }
       }
       post {
         success {
