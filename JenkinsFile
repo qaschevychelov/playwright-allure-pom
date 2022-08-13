@@ -24,12 +24,7 @@ pipeline {
           npm run test
         '''
       }
-      post {
-        success {
-          archiveArtifacts(artifacts: 'homepage-*.png', followSymlinks: false)
-          sh 'rm -rf *.png'
-        }
-      }
+      allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
     }
   }
 }
