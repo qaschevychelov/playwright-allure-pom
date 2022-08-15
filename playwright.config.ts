@@ -14,7 +14,7 @@ const config: PlaywrightTestConfig = {
   testDir: './tests',
   snapshotDir: './fixtures/screenshots',
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 120 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -42,7 +42,7 @@ const config: PlaywrightTestConfig = {
       password: "d3rgFcp7"
     } : undefined,
     screenshot: "only-on-failure",
-    headless: false,
+    headless: true,
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     video: 'retain-on-failure',

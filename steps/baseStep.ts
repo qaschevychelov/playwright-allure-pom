@@ -11,12 +11,7 @@ export class BaseStep {
     async isAnyTextViisible(text: string): Promise<boolean> {
         await test.step(`текст отображается? ${text}`, async () => {
         });
-        let b: boolean
-        b = await this.basePage.getAnyText(text).isVisible();
-        return new Promise((res, rej) => {
-            if (res) return res
-            else return false
-        })
+        return await this.basePage.getAnyText(text).isVisible();
     }
     async submit(btnName: string) {
         await test.step(`Нажать кнопку ${btnName}`, async () => {
