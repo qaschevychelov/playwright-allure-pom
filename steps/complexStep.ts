@@ -52,7 +52,7 @@ class YouMoney {
 
         for (let index = 0; index < 5; index++) {
             if (await this.youMoneyStep.isAnyTextViisible("Ваш платеж обрабатывается")) {
-                await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, 20000));
                 await this.youMoneyStep.basePage.page.reload()
             }
         }

@@ -42,7 +42,7 @@ const config: PlaywrightTestConfig = {
       password: "d3rgFcp7"
     } : undefined,
     screenshot: "only-on-failure",
-    headless: true,
+    headless: false,
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     video: 'retain-on-failure',

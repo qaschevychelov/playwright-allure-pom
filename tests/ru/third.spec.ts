@@ -54,7 +54,7 @@ test.describe('Создание заказов youMoney', () => {
     await app.orderResultStep.checkAnyTextIsVisible("На главную")
   })
 
-  test('подписчики - фейл, невалидная карта', async ({ app }) => {
+  test.only('подписчики - фейл, невалидная карта', async ({ app }) => {
     await app.homeStep.setField("Имя профиля Инстаграм", logins.valid[0])
     await app.homeStep.submit("Раскрутить Инстаграм")
 
