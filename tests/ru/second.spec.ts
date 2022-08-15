@@ -1,8 +1,8 @@
-import { BurgerStep } from '../steps/burgerStep'
-import * as policy from '../fixtures/data/confidentPolicy.json'
-import * as oferta from '../fixtures/data/oferta.json'
-import * as returnPolicy from '../fixtures/data/returnPolicy.json'
-import { test } from '../fixtures/extFixtures/extFixtures';
+import { BurgerStep } from '../../steps/burgerStep'
+import * as policy from '../../fixtures/data/confidentPolicy.json'
+import * as oferta from '../../fixtures/data/oferta.json'
+import * as returnPolicy from '../../fixtures/data/returnPolicy.json'
+import { test } from '../../fixtures/extFixtures/extFixtures';
 
 
 test.describe('проверка соглашений', () => {

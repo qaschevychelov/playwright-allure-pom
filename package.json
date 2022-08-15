@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "debug": "ALLURE_RESULTS_DIR=allure-results npx playwright test tests/first.spec.ts --project=chromium",
-    "test": "ALLURE_RESULTS_DIR=allure-results npx playwright test --project=chromium",
-    "proxy": "proxy=true ALLURE_RESULTS_DIR=allure-results npx playwright test --project=chromium",
+    "test": "ALLURE_RESULTS_DIR=allure-results npx playwright test /tests/ru --project=chromium",
+    "proxy": "proxy=true ALLURE_RESULTS_DIR=allure-results npx playwright test /tests/proxy --project=chromium --grep @en",
     "default:report": "npx playwright show-report",
     "allure": "allure serve"
   },

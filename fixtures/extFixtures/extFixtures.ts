@@ -1,3 +1,4 @@
+import { StripeStep } from './../../steps/stripeStep';
 import { PayMoreStep } from './../../steps/payMoreSteps';
 import { ComplexStep } from './../../steps/complexStep';
 import { YouMoneyStep } from './../../steps/youMoneySteps';
@@ -13,6 +14,7 @@ export const app = (page: Page) => ({
     profileStep: new ProfileStep(page),
     youMoneyStep: new YouMoneyStep(page),
     payMoreStep: new PayMoreStep(page),
+    stripeStep: new StripeStep(page),
     orderResultStep: new OrderResultStep(page),
     complexStep: new ComplexStep(page)
 })

@@ -1,6 +1,6 @@
-import { test } from '../fixtures/extFixtures/extFixtures';
-import * as logins from '../fixtures/data/logins.json'
-import * as cards from '../fixtures/data/payments.json'
+import { test } from '../../fixtures/extFixtures/extFixtures';
+import * as logins from '../../fixtures/data/logins.json'
+import * as cards from '../../fixtures/data/payments.json'
 import { faker } from '@faker-js/faker/locale/ru'
 
 test.describe('Создание заказов paymore', () => {

@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker/locale/en';
+import { StripeStep } from './stripeStep';
 import { PayMoreStep } from './payMoreSteps';
 import { OrderResultStep } from './orderResultStep';
 import { YouMoneyStep } from './youMoneySteps';
@@ -7,11 +9,13 @@ import { BaseStep } from './baseStep';
 export class ComplexStep extends BaseStep {
     readonly youMoney: YouMoney
     readonly payMore: PayMore
+    readonly stripe: Stripe
 
     constructor(page: Page) {
         super(page)
         this.youMoney = new YouMoney(page)
         this.payMore = new PayMore(page)
+        this.stripe = new Stripe(page)
     }
 }
 
@@ -127,6 +131,63 @@ class PayMore {
         await this.payMoreStep.clickBtn("Оплатить", true)
 
         await this.payMoreStep.clickLink("Завершить")
+        await this.orderResultStep.waitForPageLoaded()
+    }
+}
+
+class Stripe {
+    readonly profileStep: ProfileStep
+    readonly stripeStep: StripeStep
+    readonly orderResultStep: OrderResultStep
+
+    constructor(page: Page) {
+        this.profileStep = new ProfileStep(page)
+        this.stripeStep = new StripeStep(page)
+        this.orderResultStep = new OrderResultStep(page)
+    }
+
+    async makeSubsOrder(cardNum: string, mm: string, yy: string, cvc: string) {
+        await this.profileStep.clickBuy100Subs()
+        await this.profileStep.agreeWithOferta()
+        await this.profileStep.clickBtn("Pay")
+
+        await this.profileStep.checkInputIsVisibleByPlaceHolder("1234 1234 1234 1234", 20000)
+        await new Promise(r => setTimeout(r, 2000));
+        await this.stripeStep.setBillingName(faker.name.fullName())
+        await this.stripeStep.setEmail(faker.hacker.noun() + "@test.test")
+        await this.profileStep.setField("MM / YY", mm + yy)
+        await this.profileStep.setField("CVC", cvc)
+        await this.profileStep.setField("Postal code", "AL3 8QE")
+        await this.stripeStep.setCard(cardNum)
+        await new Promise(r => setTimeout(r, 2000));
+        await this.stripeStep.submit()
+
+        for (let index = 0; index < 5; index++) {
+            if (await this.stripeStep.isAnyTextViisible("Your payment is being processed")) {
+                await new Promise(r => setTimeout(r, 2000));
+                await this.stripeStep.basePage.page.reload()
+            }
+        }
+
+        await this.orderResultStep.waitForPageLoaded()
+    }
+
+    async makeLikeViewOrder(cardNum: string, mm: string, yy: string, cvc: string) {
+        await this.profileStep.clickBuy100LikePost()
+        await this.profileStep.agreeWithOferta()
+        await this.profileStep.clickBtn("Pay")
+
+        await this.profileStep.checkInputIsVisibleByPlaceHolder("1234 1234 1234 1234", 20000)
+        await new Promise(r => setTimeout(r, 2000));
+        await this.stripeStep.setBillingName(faker.name.fullName())
+        await this.stripeStep.setEmail(faker.hacker.noun() + "@test.test")
+        await this.profileStep.setField("MM / YY", mm + yy)
+        await this.profileStep.setField("CVC", cvc)
+        await this.profileStep.setField("Postal code", "AL3 8QE")
+        await this.stripeStep.setCard(cardNum)
+        await new Promise(r => setTimeout(r, 2000));
+        await this.stripeStep.submit()
+
         await this.orderResultStep.waitForPageLoaded()
     }
 }

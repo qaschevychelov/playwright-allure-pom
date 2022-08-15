@@ -18,9 +18,12 @@ export class BaseStep {
             await this.basePage.getBtnByText(btnName).click()
         })
     }
-    async setField(field: string, value: string) {
+    async setField(field: string, value: string, delay?: number) {
         await test.step(`Ввести в поле ${field} значение ${value}`, async () => {
-            await this.basePage.getInputByPlaceHolder(field).type(value)
+            if (typeof delay == 'undefined')
+                await this.basePage.getInputByPlaceHolder(field).type(value)
+            else
+                await this.basePage.getInputByPlaceHolder(field).type(value, {delay: delay})
         })
     }
 
@@ -43,9 +46,12 @@ export class BaseStep {
             await expect(this.basePage.getBtnByText(btnName)).toBeVisible(params)
         })
     }
-    async checkInputIsVisibleByPlaceHolder(placeHolder: string) {
+    async checkInputIsVisibleByPlaceHolder(placeHolder: string, timeout?: number) {
         await test.step(`Поле ввода '${placeHolder}' отображается`, async () => {
-            await expect(this.basePage.getInputByPlaceHolder(placeHolder)).toBeVisible()
+            if (typeof timeout == 'undefined')
+                await expect(this.basePage.getInputByPlaceHolder(placeHolder)).toBeVisible()
+            else
+                await expect(this.basePage.getInputByPlaceHolder(placeHolder)).toBeVisible({timeout: timeout})
         })
     }
 

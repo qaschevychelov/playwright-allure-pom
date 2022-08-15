@@ -1,5 +1,5 @@
-import { test } from '../fixtures/extFixtures/extFixtures';
-import * as logins from '../fixtures/data/logins.json'
+import { test } from '../../fixtures/extFixtures/extFixtures';
+import * as logins from '../../fixtures/data/logins.json'
 
 test.describe('страница профиля', () => {
   test.beforeEach(async ({ page }) => {

@@ -1,7 +1,7 @@
-import * as errors from '../fixtures/data/errors.json'
-import * as langs from '../fixtures/data/langs.json'
-import * as logins from '../fixtures/data/logins.json'
-import { test } from '../fixtures/extFixtures/extFixtures';
+import * as errors from '../../fixtures/data/errors.json'
+import * as langs from '../../fixtures/data/langs.json'
+import * as logins from '../../fixtures/data/logins.json'
+import { test } from '../../fixtures/extFixtures/extFixtures';
 
 
 test.describe('домашняя', () => {
