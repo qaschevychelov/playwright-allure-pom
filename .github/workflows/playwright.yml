@@ -1,18 +1,15 @@
-on:
-  push:
-    branches:
-    - master
-
-jobs:
-  e2e-tests:
-    runs-on: ubuntu-latest # or macos-latest, windows-latest
-
+steps:
+  playwright:
+    name: 'Playwright Tests'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.25.0-focal
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-
-      - uses: microsoft/playwright-github-action@v1
-
-      - name: Install dependencies and run tests
-        run: npm install && npx playwright install-deps && npm run test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm ci && npx playwright install-deps
+      - name: Run your tests
+        run: npm run test
