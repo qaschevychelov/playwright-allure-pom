@@ -5,7 +5,7 @@ import { OrderResultStep } from './orderResultStep';
 import { YouMoneyStep } from './youMoneySteps';
 import { ProfileStep } from './profileStep';
 import { Page } from '@playwright/test';
-import { BaseStep } from './baseStep';
+import { BaseStep } from './BaseStep';
 export class ComplexStep extends BaseStep {
     readonly youMoney: YouMoney
     readonly payMore: PayMore

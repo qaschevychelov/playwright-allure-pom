@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { YouMoneyPage } from './../pages/youMoneyPage';
-import { BaseStep } from './baseStep';
+import { BaseStep } from './BaseStep';
 import { test } from '@playwright/test'
 
 export class YouMoneyStep extends BaseStep {
