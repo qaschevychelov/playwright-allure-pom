@@ -24,3 +24,10 @@ jobs:
       with:
         name: test-artifacts
         path: playwright-report
+    - name: Deploy Allure Report
+      uses: JamesIves/github-pages-deploy-action@3.1.0
+      with:
+        ACCESS_TOKEN: ${{ secrets.DEPLOY_ALLURE }}
+        BRANCH: 'master'
+        FOLDER: 'playwright-report'
+        TARGET_FOLDER: 'docs2'
