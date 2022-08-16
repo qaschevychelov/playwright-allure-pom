@@ -1,6 +1,12 @@
-steps:
-  playwright:
-    name: 'Playwright Tests'
+name: Playwright Tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.25.0-focal
