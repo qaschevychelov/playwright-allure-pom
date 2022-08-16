@@ -19,19 +19,8 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run your tests
       run: npm run test
-    - name: Create Report
-      if: always()
-      # пытаемся сохранить историю предыдущих прогонов, если она была
-      run: cp -r $(pwd)/docs/history/. $(pwd)/allure-results/history || true && allure generate
-    - uses: actions/upload-artifact@v1
-      if: always()
+    - uses: actions/upload-artifact@v2
+      if: ${{ always() }}
       with:
-        name: allure-report
-        path: ./allure-report
-    - name: Deploy Allure Report
-      uses: JamesIves/github-pages-deploy-action@3.1.0
-      with:
-        ACCESS_TOKEN: ${{ secrets.DEPLOY_ALLURE }}
-        BRANCH: 'master'
-        FOLDER: 'allure-report'
-        TARGET_FOLDER: 'docs'
+        name: test-artifacts
+        path: playwright-report
