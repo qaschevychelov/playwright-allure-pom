@@ -1,4 +1,4 @@
-import { BaseStep } from "./baseStep";
+import { BaseStep } from "./BaseStep";
 import { ProfilePage } from "../pages/profilePage";
 import { expect, Page, test } from "@playwright/test";
 
