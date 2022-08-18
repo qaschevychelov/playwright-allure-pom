@@ -1,22 +1,22 @@
 pipeline {
     agent any
     stages {
-        try {
-            stage('TESTS') {
-                agent {
-                    docker {
-                        image 'pw_custom'
-                    }
+        stage('TESTS') {
+            agent {
+                docker {
+                    image 'pw_custom'
                 }
-                steps {
-                    sh 'npm install'
-                    sh 'npx playwright install-deps'
-                    sh 'npm run test'
+            }
+            steps {
+                script {
+                    try {
+                        sh 'npm install'
+                        sh 'npx playwright install-deps'
+                        sh 'npm run test'
+                    }catch(e) {}
                 }
             }
         }
-        catch(e) {}
-        
         stage('Make report') {
             steps {
                 publishHTML([
