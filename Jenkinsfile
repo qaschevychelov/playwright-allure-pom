@@ -4,7 +4,9 @@ pipeline {
         stage('TESTS') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.24.2-focal'
+                    image 'pw_custom'
+                    command "-v /var/jenkins_home/jobs/pipeLine/workspace@2:/var/jenkins_home/jobs/pipeLine/workspace@2"
+                    // image 'mcr.microsoft.com/playwright:v1.24.2-focal'
                 }
             }
             steps {
