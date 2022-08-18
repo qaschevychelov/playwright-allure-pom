@@ -29,6 +29,7 @@ pipeline {
                     reportName: 'Отчет', 
                     reportTitles: ''
                 ])
+            }
         }
     }
 }
