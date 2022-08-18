@@ -5,7 +5,6 @@ pipeline {
             agent {
                 docker {
                     image 'pw_custom'
-                    args "-v /var/jenkins_home/:/var/jenkins_home/"
                     // image 'mcr.microsoft.com/playwright:v1.24.2-focal'
                 }
             }
