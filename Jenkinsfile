@@ -4,7 +4,7 @@ pipeline {
         stage('TESTS') {
             agent {
                 docker {
-                    image 'mcr.microsoft.com/playwright:v1.24.2'
+                    image 'pw_custom'
                 }
             }
             steps {
