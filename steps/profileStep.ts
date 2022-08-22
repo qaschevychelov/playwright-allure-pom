@@ -15,6 +15,11 @@ export class ProfileStep extends BaseStep {
       await this.profilePage.youMoney.click()
     })
   }
+  async chooseCrypto() {
+    await test.step(`выбираем crypto`, async () => {
+      await this.profilePage.crypto.click()
+    })
+  }
   async agreeWithOferta() {
     await test.step(`соглашаемся с офертой`, async () => {
       await this.profilePage.ofertaCheckBox.click({ position: { "x": 10, "y": 5 } })
@@ -47,7 +52,7 @@ export class ProfileStep extends BaseStep {
   }
   async checkAvatarIsVisible() {
     await test.step("отображается аватар", async () => {
-      await expect(this.profilePage.avatar).toBeVisible({ timeout: 10000 })
+      await expect(this.profilePage.avatar).toBeVisible({ timeout: 20000 })
     })
   }
 }

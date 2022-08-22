@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "debug": "ALLURE_RESULTS_DIR=allure-results npx playwright test tests/first.spec.ts --project=chromium",
-    "test": "npx playwright test /tests/ru --project=chromium",
+    "test": "ALLURE_RESULTS_DIR=allure-results npx playwright test /tests/ru --project=chromium",
     "proxy": "proxy=true ALLURE_RESULTS_DIR=allure-results npx playwright test /tests/proxy --project=chromium --grep @en",
+    "all_suites": "npm run test || true && npm run proxy || true && allure serve",
     "default:report": "npx playwright show-report",
     "allure": "allure serve"
   },
@@ -16,7 +17,9 @@
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",
     "@playwright/test": "^1.24.2",
+    "@types/sinon": "^10.0.13",
     "allure-playwright": "^2.0.0-beta.18",
+    "sinon": "^14.0.0",
     "typescript": "^4.7.4"
   }
 }

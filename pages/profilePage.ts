@@ -5,6 +5,7 @@ export class ProfilePage extends BasePage {
     readonly avatar: Locator
     readonly ofertaCheckBox: Locator
     readonly youMoney: Locator
+    readonly crypto: Locator
     readonly buy100SubsBtn: Locator
     readonly buy100LikePostBtn: Locator
 
@@ -13,6 +14,7 @@ export class ProfilePage extends BasePage {
         this.avatar = this.page.locator("//div[@class='avatar']/img")
         this.ofertaCheckBox = this.page.locator("//label[input[@id='payment_policy_agree']]")
         this.youMoney = this.page.locator("//div[img[@alt='ЮMoney']]")
+        this.crypto = this.page.locator("//div[img[@alt='Криптовалюта']]")
         this.buy100SubsBtn = this.page.locator("(//div[contains(@class,'service-list')]//div[@class='service-list-item']//button)[1]")
         this.buy100LikePostBtn = this.page.locator("(//div[@class='service-preview']//div[@class='service-list-item']//button)[1]")
     }
