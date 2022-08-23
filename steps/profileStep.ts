@@ -20,6 +20,11 @@ export class ProfileStep extends BaseStep {
       await this.profilePage.crypto.click()
     })
   }
+  async choosePayPal() {
+    await test.step(`выбираем PayPal`, async () => {
+      await this.profilePage.payPal.click()
+    })
+  }
   async agreeWithOferta() {
     await test.step(`соглашаемся с офертой`, async () => {
       await this.profilePage.ofertaCheckBox.click({ position: { "x": 10, "y": 5 } })

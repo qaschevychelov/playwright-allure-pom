@@ -1,3 +1,4 @@
+import { PayPalStep } from './payPalStep';
 import { faker } from '@faker-js/faker/locale/en';
 import { StripeStep } from './stripeStep';
 import { PayMoreStep } from './payMoreSteps';
@@ -10,12 +11,14 @@ export class ComplexStep extends BaseStep {
     readonly youMoney: YouMoney
     readonly payMore: PayMore
     readonly stripe: Stripe
+    readonly payPal: PayPal
 
     constructor(page: Page) {
         super(page)
         this.youMoney = new YouMoney(page)
         this.payMore = new PayMore(page)
         this.stripe = new Stripe(page)
+        this.payPal = new PayPal(page)
     }
 }
 
@@ -195,5 +198,55 @@ class Stripe {
         await this.stripeStep.submit()
 
         await this.orderResultStep.waitForPageLoaded()
+    }
+}
+
+class PayPal {
+    readonly profileStep: ProfileStep
+    readonly payPalStep: PayPalStep
+    readonly orderResultStep: OrderResultStep
+
+    constructor(page: Page) {
+        this.profileStep = new ProfileStep(page)
+        this.payPalStep = new PayPalStep(page)
+        this.orderResultStep = new OrderResultStep(page)
+    }
+
+    async makeSubsOrder(email: string, pass: string) {
+        await this.profileStep.clickBuy100Subs()
+        await this.profileStep.agreeWithOferta()
+        await this.profileStep.choosePayPal()
+        await this.profileStep.clickBtn("Pay")
+        await this.profileStep.setField("Email or mobile number", email)
+        await this.profileStep.clickBtn("Next")
+        await this.profileStep.setField("Password", pass)
+        await this.profileStep.clickBtn("Log In")
+        await this.payPalStep.clickPay()
+    
+        for (let index = 0; index < 12; index++) {
+            if (await this.payPalStep.isAnyTextViisible("Your payment is being processed")) {
+                await new Promise(r => setTimeout(r, 5000));
+                await this.payPalStep.basePage.page.reload({waitUntil: "load"})
+                continue
+            }
+            break
+        }
+
+        await this.orderResultStep.waitForPageLoaded()
+    }
+
+    async makeLikeViewOrder(email: string, pass: string) {
+        await this.profileStep.clickBuy100LikePost()
+        await this.profileStep.agreeWithOferta()
+        await this.profileStep.choosePayPal()
+        await this.profileStep.clickBtn("Pay")
+        await this.profileStep.setField("Email or mobile number", email)
+        await this.profileStep.clickBtn("Next")
+        await this.profileStep.setField("Password", pass)
+        await this.profileStep.clickBtn("Log In")
+        await this.payPalStep.clickPay()
+    
+        await this.orderResultStep.waitForPageLoaded()
+
     }
 }

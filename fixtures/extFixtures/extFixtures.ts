@@ -1,3 +1,4 @@
+import { PayPalStep } from './../../steps/payPalStep';
 import { StripeStep } from './../../steps/stripeStep';
 import { PayMoreStep } from './../../steps/payMoreSteps';
 import { ComplexStep } from './../../steps/complexStep';
@@ -15,6 +16,7 @@ export const app = (page: Page) => ({
     youMoneyStep: new YouMoneyStep(page),
     payMoreStep: new PayMoreStep(page),
     stripeStep: new StripeStep(page),
+    payPalStep: new PayPalStep(page),
     orderResultStep: new OrderResultStep(page),
     complexStep: new ComplexStep(page)
 })
