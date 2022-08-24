@@ -8,7 +8,7 @@ test.describe('Создание заказов PayPal @en', () => {
     await page.goto("/")
   });
 
-  test(`подписчики - успех`, async ({ app, page }) => {
+  test.only(`подписчики - успех`, async ({ app, page }) => {
     await app.homeStep.setField("Enter your Instagram username", logins.valid[0])
     await app.homeStep.submit("Promote Instagram")
 

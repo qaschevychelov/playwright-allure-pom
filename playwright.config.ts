@@ -42,7 +42,7 @@ const config: PlaywrightTestConfig = {
       password: "d3rgFcp7"
     } : undefined,
     screenshot: "only-on-failure",
-    headless: true,
+    headless: false,
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
     video: 'retain-on-failure',
@@ -61,6 +61,7 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        actionTimeout: 30000
       },
     },
 
@@ -68,6 +69,7 @@ const config: PlaywrightTestConfig = {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
+        actionTimeout: 30000
       },
     },
 
@@ -75,6 +77,7 @@ const config: PlaywrightTestConfig = {
       name: 'webkit',
       use: {
         ...devices['Desktop Safari'],
+        actionTimeout: 30000
       },
     },
 
