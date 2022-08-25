@@ -220,7 +220,6 @@ class PayPal {
         await this.profileStep.setField("Email or mobile number", email)
         await this.profileStep.clickBtn("Next")
         await this.profileStep.setField("Password", pass)
-        await this.profileStep.clickBtn("Log In")
         await this.payPalStep.clickPay()
     
         for (let index = 0; index < 12; index++) {
@@ -243,7 +242,6 @@ class PayPal {
         await this.profileStep.setField("Email or mobile number", email)
         await this.profileStep.clickBtn("Next")
         await this.profileStep.setField("Password", pass)
-        await this.profileStep.clickBtn("Log In")
         await this.payPalStep.clickPay()
     
         await this.orderResultStep.waitForPageLoaded()

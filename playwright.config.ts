@@ -61,7 +61,7 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        actionTimeout: 30000
+        actionTimeout: 10000
       },
     },
 
@@ -69,7 +69,7 @@ const config: PlaywrightTestConfig = {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
-        actionTimeout: 30000
+        actionTimeout: 10000
       },
     },
 
@@ -77,7 +77,7 @@ const config: PlaywrightTestConfig = {
       name: 'webkit',
       use: {
         ...devices['Desktop Safari'],
-        actionTimeout: 30000
+        actionTimeout: 10000
       },
     },
 

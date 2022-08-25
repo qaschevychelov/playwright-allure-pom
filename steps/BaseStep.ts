@@ -8,6 +8,12 @@ export class BaseStep {
         this.basePage = new BasePage(page)
     }
 
+    async setCheckbox(checkBoxName: string, state: boolean) {
+        await test.step(`ставим чекбокс ${checkBoxName} в ${state}`, async () => {
+            if (await this.basePage.getCheckBox(checkBoxName).isChecked() !== state)
+            await this.basePage.getCheckBox(checkBoxName).click()
+        })
+    }
     async isAnyTextViisible(text: string): Promise<boolean> {
         await test.step(`текст отображается? ${text}`, async () => {
         });

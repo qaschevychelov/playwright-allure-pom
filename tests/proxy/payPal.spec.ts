@@ -1,14 +1,13 @@
-import { faker } from '@faker-js/faker/locale/en';
+import * as logins from '../../fixtures/data/logins.json';
+import * as payments from '../../fixtures/data/payments.json';
 import { test } from '../../fixtures/extFixtures/extFixtures';
-import * as logins from '../../fixtures/data/logins.json'
-import * as payments from '../../fixtures/data/payments.json'
 
 test.describe('Создание заказов PayPal @en', () => {
   test.beforeEach(async ({ page, context }) => {
     await page.goto("/")
   });
 
-  test.only(`подписчики - успех`, async ({ app, page }) => {
+  test(`подписчики - успех`, async ({ app, page }) => {
     await app.homeStep.setField("Enter your Instagram username", logins.valid[0])
     await app.homeStep.submit("Promote Instagram")
 

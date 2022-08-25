@@ -3,11 +3,15 @@ import { Locator, Page } from "@playwright/test";
 export class BasePage {
     readonly page: Page;
     readonly langSwitcher: Locator;
-  
-
+    
+    
     constructor(page: Page) {
         this.page = page
         this.langSwitcher = this.page.locator("//div[contains(@class,'nav-lang')][span]")
+    }
+
+    getCheckBox(checkBoxName: string): Locator {
+        return this.page.locator(`//label[normalize-space(.)='${checkBoxName}']/input[@type='checkbox']`)
     }
     
     getInputByPlaceHolder(text: string): Locator {
